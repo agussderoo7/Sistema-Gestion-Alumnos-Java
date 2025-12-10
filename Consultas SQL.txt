@@ -1,0 +1,69 @@
+(Por si hay que borrarlas)
+DROP TABLE IF EXISTS NotaParcial;
+DROP TABLE IF EXISTS Inscripcion;
+DROP TABLE IF EXISTS Alumno;
+DROP TABLE IF EXISTS Curso;
+DROP TABLE IF EXISTS Profesor;
+DROP TABLE IF EXISTS Abono;
+
+-- 1. Tabla Abono (no depende de nadie)
+CREATE TABLE Abono (
+    idAbono INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    valor DOUBLE,
+    descuento DOUBLE
+);
+
+-- 2. Tabla Profesor (no depende de nadie)
+CREATE TABLE Profesor (
+    idProfesor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    apellido VARCHAR(255),
+    email VARCHAR(255)
+);
+
+-- 3. Tabla Alumno (depende de Abono)
+CREATE TABLE Alumno (
+    idAlumno INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    apellido VARCHAR(255),
+    email VARCHAR(255),
+    limiteCursos INT,
+    idAbono INT,  -- Esta es la clave foránea
+    FOREIGN KEY (idAbono) REFERENCES Abono(idAbono)
+);
+
+-- 4. Tabla Curso (depende de Profesor)
+CREATE TABLE Curso (
+    idCurso INT AUTO_INCREMENT PRIMARY KEY,
+    nombreCurso VARCHAR(255),
+    precioCurso FLOAT,
+    cupo INT,
+    notaAprobacion INT,
+    cantidadParciales INT,
+    fechaPromocionDesde DATE,
+    fechaPromocionHasta DATE,
+    precioPromocion FLOAT,
+    idProfesor INT, -- Esta es la clave foránea
+    FOREIGN KEY (idProfesor) REFERENCES Profesor(idProfesor)
+);
+
+-- 5. Tabla Inscripcion (depende de Alumno y Curso)
+CREATE TABLE Inscripcion (
+    idInscripcion INT AUTO_INCREMENT PRIMARY KEY,
+    idCurso INT,
+    idAlumno INT,
+    fechaInscripcion DATE,
+    notaFinal INT,
+    importePagado DOUBLE,
+    FOREIGN KEY (idCurso) REFERENCES Curso(idCurso),
+    FOREIGN KEY (idAlumno) REFERENCES Alumno(idAlumno)
+);
+
+-- 6. Tabla NotaParcial (depende de Inscripcion)
+CREATE TABLE NotaParcial (
+    idNota INT AUTO_INCREMENT PRIMARY KEY,
+    idInscripcion INT,
+    nota INT,
+    FOREIGN KEY (idInscripcion) REFERENCES Inscripcion(idInscripcion)
+);
