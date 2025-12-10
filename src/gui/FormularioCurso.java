@@ -1,5 +1,4 @@
 package gui;
-
 // Importa todos los servicios y entidades que necesita
 import Entidades.Curso;
 import Entidades.Profesor;
