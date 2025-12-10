@@ -1,11 +1,9 @@
 package gui;
-// Importa todos los servicios y entidades que necesita
 import Entidades.Curso;
 import Entidades.Profesor;
 import service.ServiceCurso;
 import service.ServiceProfesor;
 import service.ServiceException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +26,6 @@ public class FormularioCurso extends JPanel {
     private JComboBox<Profesor> comboProfesor;
     private JButton botonGrabar;
     private JButton botonRefrescar;
-
     private Integer idCursoModificando = null;
 
     public FormularioCurso(PanelManager panel) {
@@ -108,9 +105,9 @@ public class FormularioCurso extends JPanel {
 
             DefaultComboBoxModel<Profesor> model = new DefaultComboBoxModel<>();
             if (profesores.isEmpty()) {
-                // Si no hay profes, no se puede crear un curso
+                // Si no hay profesores, no se puede crear un curso
                 JOptionPane.showMessageDialog(this, "Error: No hay profesores cargados en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
-                botonGrabar.setEnabled(false); // Esta parte deshabilita el botón
+                botonGrabar.setEnabled(false); // Deshabilita el botón
             } else {
                 for (Profesor p : profesores) {
                     model.addElement(p);
@@ -151,7 +148,7 @@ public class FormularioCurso extends JPanel {
                 );
                 JOptionPane.showMessageDialog(this, "¡Curso creado con éxito!");
             } else {
-                // --- MODO MODIFICAR ---
+                // Modo modificar
                 Curso cursoModificado = new Curso();
                 cursoModificado.setIdCurso(idCursoModificando);
                 cursoModificado.setNombreCurso(nombre);
