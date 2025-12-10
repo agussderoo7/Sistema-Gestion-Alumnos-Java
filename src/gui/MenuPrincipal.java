@@ -1,12 +1,8 @@
 package gui;
-import service.ServiceAlumno;
-import service.ServiceProfesor;
-import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class MenuPrincipal extends JPanel {
     PanelManager panel;
