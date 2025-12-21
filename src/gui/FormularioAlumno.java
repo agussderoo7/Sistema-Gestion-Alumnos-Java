@@ -21,7 +21,6 @@ public class FormularioAlumno extends JPanel {
 
     private JComboBox<Abono> comboAbono;
     private JButton btnRefrescarAbono;
-
     private JButton jButtonGrabar;
 
     public FormularioAlumno(PanelManager panelManager) {
@@ -32,9 +31,14 @@ public class FormularioAlumno extends JPanel {
     }
 
     public void armarFormulario() {
-        // 6 filas y 2 columnas de layout
-        this.setLayout(new GridLayout(6, 2, 10, 10));
+        this.setLayout(new GridBagLayout());
         this.setBackground(Color.white);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Márgenes
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weighty = 1.0;
+        gbc.ipady = 15;
 
         // Inicializar campos
         jTextFieldNombre = new JTextField(20);
@@ -44,35 +48,93 @@ public class FormularioAlumno extends JPanel {
 
         // Inicializar combo y boton de Refrescar
         comboAbono = new JComboBox<>();
-        btnRefrescarAbono = new JButton("Refrescar"); // <-- Inicializar
+        btnRefrescarAbono = new JButton("Refrescar");
+        jButtonGrabar = new JButton("Grabar Alumno");
 
         // Cargar los datos iniciales
         cargarAbonos();
 
-        jButtonGrabar = new JButton("Grabar Alumno");
+        // Nombre
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.weightx = 0; // Label fijo
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Nombre:"), gbc);
 
-        this.add(new JLabel("Nombre:"));
-        this.add(jTextFieldNombre);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0; // Campo se estira
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(jTextFieldNombre, gbc);
 
-        this.add(new JLabel("Apellido:"));
-        this.add(jTextFieldApellido);
+        // Apellido
+        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Apellido:"), gbc);
 
-        this.add(new JLabel("Email:"));
-        this.add(jTextFieldEmail);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(jTextFieldApellido, gbc);
 
-        this.add(new JLabel("Límite de Cursos:"));
-        this.add(jTextFieldLimiteCursos);
+        // Email
+        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Email:"), gbc);
 
-        this.add(new JLabel("Abono:"));
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(jTextFieldEmail, gbc);
 
-        // Pongo el combo y el boton juntos en un panel chiquito
-        JPanel panelAbono = new JPanel(new BorderLayout());
+        // Límite Cursos
+        gbc.gridx = 0; gbc.gridy = 3;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Límite de Cursos:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(jTextFieldLimiteCursos, gbc);
+
+        // Abono (combo + botón)
+        gbc.gridx = 0; gbc.gridy = 4;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Abono:"), gbc);
+
+        // Panel interno para agrupar combo y botón
+        JPanel panelAbono = new JPanel(new BorderLayout(5, 0));
+        panelAbono.setBackground(Color.white);
         panelAbono.add(comboAbono, BorderLayout.CENTER);
         panelAbono.add(btnRefrescarAbono, BorderLayout.EAST);
 
-        this.add(panelAbono); // Agrego el panel chiquito en lugar del combo solo
-        this.add(new JLabel("")); // Espacio vacío para alinear
-        this.add(jButtonGrabar);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0; // El panel entero se estira
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(panelAbono, gbc);
+
+        // Grabar
+        gbc.gridx = 0; gbc.gridy = 5;
+        gbc.gridwidth = 2; // Ocupa el ancho en su totalidad
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(20, 5, 5, 5); // Margen extra arriba
+
+        jButtonGrabar.setPreferredSize(new Dimension(200, 40));
+        add(jButtonGrabar, gbc);
 
         // Botones
         btnRefrescarAbono.addActionListener(new ActionListener() {

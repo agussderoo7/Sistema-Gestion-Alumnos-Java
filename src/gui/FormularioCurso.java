@@ -42,8 +42,8 @@ public class FormularioCurso extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // Márgenes entre componentes (Arriba, Izquierda, Abajo, Derecha)
         gbc.anchor = GridBagConstraints.WEST; // Alinear textos a la izquierda
-        gbc.weighty = 1.0; // Cuando maximiza la pantalla se ajusta
-        gbc.ipady = 15; // Le da más presencia
+        gbc.weighty = 1.0; // Reparte altura equitativamente
+        gbc.ipady = 15; // Le da más presencia a los campos
 
         txtNombre = new JTextField(20);
         txtPrecio = new JTextField(10);

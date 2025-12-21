@@ -19,28 +19,71 @@ public class FormularioAbono extends JPanel {
     }
 
     private void armarFormulario() {
-        // Layout: 4 filas, 2 columnas
-        this.setLayout(new GridLayout(4, 2, 10, 10));
+        // GridBagLayout para consistencia visual con el resto de la aplicación
+        this.setLayout(new GridBagLayout());
         this.setBackground(Color.white);
 
-        // Inicializar
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weighty = 1.0;
+        gbc.ipady = 15;
+
+        // Inicializar componentes
         textoNombre = new JTextField(20);
         textoValor = new JTextField(10);
         textoDescuento = new JTextField(10);
         botonGrabar = new JButton("Crear Abono");
 
-        // Añadir componentes
-        add(new JLabel("Nombre del Abono:"));
-        add(textoNombre);
+        // Nombre
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.weightx = 0; // Label fijo
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Nombre del Abono:"), gbc);
 
-        add(new JLabel("Valor ($): (Poner 0 si es beca)"));
-        add(textoValor);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0; // Se estira el campo
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(textoNombre, gbc);
 
-        add(new JLabel("Descuento (%): (Ej: 50)"));
-        add(textoDescuento);
+        // Valor
+        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Valor ($): (0 si es beca)"), gbc);
 
-        add(new JLabel("")); // Espacio vacío
-        add(botonGrabar);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(textoValor, gbc);
+
+        // Descuento
+        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Descuento (%):"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(textoDescuento, gbc);
+
+        // Grabar
+        gbc.gridx = 0; gbc.gridy = 3;
+        gbc.gridwidth = 2; // Ocupa las 2 columnas
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(20, 5, 5, 5); // Margen extra arriba del botón
+
+        botonGrabar.setPreferredSize(new Dimension(200, 40)); // Botón grande
+        add(botonGrabar, gbc);
 
         // Botón
         botonGrabar.addActionListener(new ActionListener() {

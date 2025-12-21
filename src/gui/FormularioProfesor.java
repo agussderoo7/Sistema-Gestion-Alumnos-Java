@@ -1,8 +1,6 @@
 package gui;
-
 import service.ServiceProfesor;
 import service.ServiceException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,26 +22,70 @@ public class FormularioProfesor extends JPanel {
     }
 
     private void armarFormulario() {
-        // Layout de 4 filas (3 datos + 1 botón), 2 columnas
-        this.setLayout(new GridLayout(4, 2, 10, 10));
+        this.setLayout(new GridBagLayout());
         this.setBackground(Color.white);
 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Márgenes
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.weighty = 1.0; // Repartir altura verticalmente
+        gbc.ipady = 15;    // Campos más altos
+
+        // Inicializar componentes
         txtNombre = new JTextField(20);
         txtApellido = new JTextField(20);
         txtEmail = new JTextField(20);
         botonGrabar = new JButton("Grabar Profesor");
 
-        add(new JLabel("Nombre:"));
-        add(txtNombre);
+        // Nombre
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.weightx = 0; // Label fijo
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Nombre:"), gbc);
 
-        add(new JLabel("Apellido:"));
-        add(txtApellido);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0; // Campo se estira
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtNombre, gbc);
 
-        add(new JLabel("Email:"));
-        add(txtEmail);
+        // Apellido
+        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Apellido:"), gbc);
 
-        add(new JLabel(""));
-        add(botonGrabar);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtApellido, gbc);
+
+        // Email
+        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Email:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtEmail, gbc);
+
+        // Grabar
+        gbc.gridx = 0; gbc.gridy = 3;
+        gbc.gridwidth = 2; // Ocupa el ancho en su totalidad
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(20, 5, 5, 5); // Margen extra arriba
+
+        botonGrabar.setPreferredSize(new Dimension(200, 40));
+        add(botonGrabar, gbc);
 
         botonGrabar.addActionListener(new ActionListener() {
             @Override
