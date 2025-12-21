@@ -1,6 +1,5 @@
 package gui;
 import Entidades.Curso;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,6 +45,7 @@ public class PanelAdmin extends JPanel{
         pestanas.addTab("Gestionar Abonos", panelFormularioAbono);
         pestanas.addTab("Agregar Cursos", panelFormularioCurso); // Es el índice 6
         pestanas.addTab("Gestionar Cursos", panelReporteCursos);
+        pestanas.setPreferredSize(new Dimension(1000, 600)); // Obliga a las tablas internas a adaptarse a este espacio
         this.add(pestanas, BorderLayout.CENTER);
 
         JButton botonVolver = new JButton("Volver al Menú Principal");
@@ -60,6 +60,6 @@ public class PanelAdmin extends JPanel{
 
     public void irAPestanaModificarCurso(Curso curso) {
         panelFormularioCurso.cargarDatosParaModificar(curso);
-        pestanas.setSelectedIndex(6); // Me lleva a "Gestionar Cursos" para modificarlo
+        pestanas.setSelectedIndex(6); // Lleva a "Gestionar Cursos" para modificarlo
     }
 }

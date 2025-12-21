@@ -35,8 +35,15 @@ public class FormularioCurso extends JPanel {
     }
 
     private void armarFormulario() {
-        this.setLayout(new GridLayout(10, 2, 10, 10));
+        // GridBagLayout para control total
+        this.setLayout(new GridBagLayout());
         this.setBackground(Color.white);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Márgenes entre componentes (Arriba, Izquierda, Abajo, Derecha)
+        gbc.anchor = GridBagConstraints.WEST; // Alinear textos a la izquierda
+        gbc.weighty = 1.0; // Cuando maximiza la pantalla se ajusta
+        gbc.ipady = 15; // Le da más presencia
 
         txtNombre = new JTextField(20);
         txtPrecio = new JTextField(10);
@@ -53,36 +60,142 @@ public class FormularioCurso extends JPanel {
         // Cargo profesores en el JComboBox
         cargarProfesores();
 
-        add(new JLabel("Nombre del Curso:"));
-        add(txtNombre);
-        add(new JLabel("Precio: ($)"));
-        add(txtPrecio);
-        add(new JLabel("Cupo:"));
-        add(txtCupo);
-        add(new JLabel("Nota Aprobación: (ej: 6)"));
-        add(txtNotaAprobacion);
-        add(new JLabel("Cantidad de Parciales:"));
-        add(txtCantParciales);
-        add(new JLabel("Fecha Promo Desde (YYYY-MM-DD):"));
-        add(txtFechaDesde);
-        add(new JLabel("Fecha Promo Hasta (YYYY-MM-DD):"));
-        add(txtFechaHasta);
-        add(new JLabel("Precio Promoción: ($)"));
-        add(txtPrecioPromo);
-        add(new JLabel("Profesor Asignado:"));
-        add(comboProfesor);
-        add(new JLabel("")); // Espacio
+        // (Fila 0) Nombre
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.weightx = 0; // El Label NO se estira
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Nombre del Curso:"), gbc);
 
-        add(new JLabel("Profesor:"));
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Ocupa el ancho
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtNombre, gbc);
 
-        JPanel panelProfesor = new JPanel(new BorderLayout());
-        panelProfesor.add(comboProfesor, BorderLayout.CENTER);
-        panelProfesor.add(botonRefrescar, BorderLayout.EAST);
-        add(panelProfesor);
+        // Precio
+        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.weightx = 0; // Resetear peso para el label
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Precio ($):"), gbc);
 
-        add(new JLabel(""));
-        add(botonGrabar);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0; // Estirar campo
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtPrecio, gbc);
 
+        // Cupo
+        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Cupo:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtCupo, gbc);
+
+        // Nota Aprobación
+        gbc.gridx = 0; gbc.gridy = 3;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Nota Aprobación:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtNotaAprobacion, gbc);
+
+        // Cantidad Parciales
+        gbc.gridx = 0; gbc.gridy = 4;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(new JLabel("Cant. Parciales:"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtCantParciales, gbc);
+
+        // Fecha Desde
+        gbc.gridx = 0; gbc.gridy = 5;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Promo Desde (AAAA-MM-DD):"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtFechaDesde, gbc);
+
+        // Fecha Hasta
+        gbc.gridx = 0; gbc.gridy = 6;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Promo Hasta (AAAA-MM-DD):"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtFechaHasta, gbc);
+
+        // Precio Promoción
+        gbc.gridx = 0; gbc.gridy = 7;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Precio Promoción ($):"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(txtPrecioPromo, gbc);
+
+        // Profesor
+        gbc.gridx = 0; gbc.gridy = 8;
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        add(new JLabel("Profesor Asignado:"), gbc);
+
+        // Panel para combo y botón
+        JPanel panelProfe = new JPanel(new BorderLayout(5, 0));
+        panelProfe.setBackground(Color.white);
+        panelProfe.add(comboProfesor, BorderLayout.CENTER);
+        panelProfe.add(botonRefrescar, BorderLayout.EAST);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.CENTER;
+        add(panelProfe, gbc);
+
+        // Grabar
+        gbc.gridx = 0; gbc.gridy = 9;
+        gbc.gridwidth = 2; // Ocupa las 2 columnas
+        gbc.weightx = 1.0; // Importante para que se centre en el ancho
+        gbc.fill = GridBagConstraints.NONE; // NO estirar el botón
+        gbc.anchor = GridBagConstraints.CENTER; // Centrarlo
+        gbc.insets = new Insets(20, 5, 5, 5); // Margen extra arriba
+
+        botonGrabar.setPreferredSize(new Dimension(200, 40));
+        add(botonGrabar, gbc);
+
+        // Botones
         botonGrabar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -128,7 +241,7 @@ public class FormularioCurso extends JPanel {
             }
             float precio = Float.parseFloat(txtPrecio.getText());
             int cupo = Integer.parseInt(txtCupo.getText());
-            int notaAprob = Integer.parseInt(txtNotaAprobacion.getText());
+            int notaAprobacion = Integer.parseInt(txtNotaAprobacion.getText());
             int cantParciales = Integer.parseInt(txtCantParciales.getText());
             Date fechaDesde = Date.valueOf(txtFechaDesde.getText());
             Date fechaHasta = Date.valueOf(txtFechaHasta.getText());
@@ -142,7 +255,7 @@ public class FormularioCurso extends JPanel {
 
             if (idCursoModificando == null) {
                 serviceCurso.crearCurso(
-                        nombre, precio, cupo, notaAprob,
+                        nombre, precio, cupo, notaAprobacion,
                         cantParciales, fechaDesde, fechaHasta,
                         precioPromo, profeSeleccionado.getIdProfesor()
                 );
@@ -154,7 +267,7 @@ public class FormularioCurso extends JPanel {
                 cursoModificado.setNombreCurso(nombre);
                 cursoModificado.setPrecioCurso(precio);
                 cursoModificado.setCupo(cupo);
-                cursoModificado.setNotaAprobacion(notaAprob);
+                cursoModificado.setNotaAprobacion(notaAprobacion);
                 cursoModificado.setCantidadParciales(cantParciales);
                 cursoModificado.setFechaPromocionDesde(fechaDesde);
                 cursoModificado.setFechaPromocionHasta(fechaHasta);

@@ -27,11 +27,12 @@ public class PanelManager {
 
     public void mostrar(JPanel panel){
         jFrame.getContentPane().removeAll();
-        jFrame.getContentPane().add(BorderLayout.CENTER, panel); // que el panel lo ponga en un punto cardinal, en este caso, en el centro
+        jFrame.getContentPane().add(BorderLayout.CENTER, panel);
         jFrame.getContentPane().validate();
         jFrame.getContentPane().repaint();
-        jFrame.show();
-        jFrame.pack();
+        jFrame.pack(); // Java calcula el tamaño según los botones
+        jFrame.setLocationRelativeTo(null); // La centramos
+        jFrame.setVisible(true); // La mostramos (setVisible > show)
     }
 
     public void mostrar(int codigoPantalla) {
