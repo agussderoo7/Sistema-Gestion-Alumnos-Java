@@ -7,15 +7,19 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
+// Panel de visualización y gestión de los cursos
 public class ReporteCurso extends JPanel{
     private PanelManager panelManager;
     private ServiceCurso serviceCurso;
+
+    // Referencia necesaria para poder cambiar de pestaña al modificar
     private PanelAdmin panelAdmin;
 
     private JTable jTable;
     private DefaultTableModel contenidoTabla;
     private JScrollPane scrollPane;
 
+    // Constructor del panel
     public ReporteCurso(PanelManager panelManager, PanelAdmin panelAdmin) {
         this.panelManager = panelManager;
         this.panelAdmin = panelAdmin;
@@ -23,6 +27,7 @@ public class ReporteCurso extends JPanel{
         armarTablaReporte();
     }
 
+    // Arma la interfaz gráfica del reporte
     public void armarTablaReporte() {
         setLayout(new BorderLayout());
 
@@ -35,6 +40,7 @@ public class ReporteCurso extends JPanel{
         jTable = new JTable(contenidoTabla);
         scrollPane = new JScrollPane(jTable);
 
+        // Definición de columnas
         contenidoTabla.addColumn("ID");
         contenidoTabla.addColumn("Nombre del Curso");
         contenidoTabla.addColumn("Profesor");
@@ -64,6 +70,7 @@ public class ReporteCurso extends JPanel{
         cargarDatos();
     }
 
+    // Obtiene la lista completa de cursos desde el servicio y llena la tabla
     private void cargarDatos() {
         contenidoTabla.setRowCount(0); // Limpia
         try {
@@ -83,6 +90,7 @@ public class ReporteCurso extends JPanel{
         }
     }
 
+    // Lógica para eliminar un curso
     private void eliminarCurso() {
         int filaSeleccionada = jTable.getSelectedRow();
         if (filaSeleccionada == -1) {
@@ -108,6 +116,7 @@ public class ReporteCurso extends JPanel{
         }
     }
 
+    // Prepara la interfaz para modificar un curso existente
     private void modificarCurso() {
         int filaSeleccionada = jTable.getSelectedRow();
         if (filaSeleccionada == -1) {
@@ -125,6 +134,7 @@ public class ReporteCurso extends JPanel{
         }
     }
 
+    // Genera y visualiza un reporte estadístico detallado del curso seleccionado
     private void verReporteDetallado(){
         int filaSeleccionada = jTable.getSelectedRow();
         if (filaSeleccionada == -1) {
