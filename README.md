@@ -75,5 +75,6 @@ Este proyecto me permitió consolidar conocimientos en:
 
 ---
 
-**Autor:** Agustin De Roo 
+**Autor:** Agustin De Roo
+
 **Contacto:** agustinderoo05@gmail.com | www.linkedin.com/in/agustinderoo
