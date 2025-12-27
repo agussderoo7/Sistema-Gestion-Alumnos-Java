@@ -66,7 +66,7 @@ El proyecto sigue una **Arquitectura en Capas (Layered Architecture)** para aseg
 
 Este proyecto me permitió consolidar conocimientos en:
 - Manejo avanzado de **Layouts en Swing**.
-- Gestión de excepciones y errores (Try-Catch, Validaciones de nulos).
+- Gestión de excepciones y errores (Try-Catch, Validación de nulos).
 - Lógica SQL.
 
 **Próximos pasos (Roadmap):**
