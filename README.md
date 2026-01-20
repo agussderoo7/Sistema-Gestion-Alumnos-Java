@@ -70,7 +70,6 @@ Este proyecto me permitió consolidar conocimientos en:
 - Lógica SQL.
 
 **Próximos pasos (Roadmap):**
-- [ ] Exportación de reportes a Excel (Apache POI).
 - [ ] Implementación de Login y Roles de usuario.
 - [ ] Migración a Spring Boot.
 
